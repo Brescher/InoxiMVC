@@ -10,7 +10,7 @@ namespace App\Config;
 class Configuration
 {
     public const DB_HOST = 'localhost';
-    public const DB_NAME = 'blog';
+    public const DB_NAME = 'inoxi';
     public const DB_USER = 'root';
     public const DB_PASS = 'dtb456';
 
@@ -19,4 +19,6 @@ class Configuration
     public const ROOT_LAYOUT = 'root.layout.view.php';
 
     public const DEBUG_QUERY = false;
+
+    public const UPLOAD_DIR = "InoxiMVC/public/files/";
 }
