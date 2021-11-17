@@ -20,5 +20,7 @@ class Configuration
 
     public const DEBUG_QUERY = false;
 
-    public const UPLOAD_DIR = "InoxiMVC/public/files/";
+    public const UPLOAD_DIR = "public/files/";
+
+    public const LOAD_DIR = "InoxiMVC/public/files/";
 }
