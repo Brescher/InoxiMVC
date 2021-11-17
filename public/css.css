@@ -1,0 +1,68 @@
+body {
+    background-image: url('../public/files/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+p{
+    font-family: Arial, Verdana, sans-serif;
+    color: lightgray;
+}
+
+h3, h2{
+    font-family: Arial, Verdana, sans-serif;
+    color: lightgray;
+    text-align: center;
+}
+
+.entry{
+    margin-bottom: 50px;
+}
+
+.header .col-md-1, .col-md-8{
+    text-transform: uppercase;
+    line-height: 22px;
+    margin: 0px;
+}
+
+.header p{
+    margin-bottom: 0px;
+}
+
+.header img {
+    max-height: 22px;
+    max-width: 22px;
+}
+
+.text{
+    border-left: 2px solid white;
+}
+
+.card {
+    display:inline-block;
+    background-color: #353535;
+    color: lightgray;
+}
+
+.card .card-body h1{
+    font-size: 100%;
+}
+
+.card-img-top{
+    width:100%;
+    height:auto;
+}
+
+.navbar-nav .nav-item .nav-link{
+    color: lightgray;
+}
+
+.navbar .navbar-collapse .navbar-nav .nav-item a:hover{
+    display: block;
+    color: black;
+}
+
+.navbar{
+    background-image: url('../public/files/pozadie-navbar.png');
+    margin-bottom: 25px;
+}
