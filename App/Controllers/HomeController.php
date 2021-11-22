@@ -52,4 +52,16 @@ class HomeController extends AControllerRedirect
         }
         $this->redirect("home");
     }
+
+    public function deleteEntry()
+    {
+        $entryId = $this->request()->getValue('entryid');
+        if($entryId > 0) {
+            $entry = Entry::getOne($entryId);
+            $name = $entry->getImage();
+            unlink(Configuration::UPLOAD_DIR . "$name");
+            $entry->delete();
+        }
+        $this->redirect('home');
+    }
 }

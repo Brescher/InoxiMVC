@@ -8,6 +8,9 @@
                     <div class="card-body">
                         <h5 class="card-title"><?= $entry->getTitle() ?></h5>
                         <p class="card-text"><?= $entry->getText() ?></p>
+                        <a href="?c=home&a=deleteEntry&entryid=<?= $entry->getId() ?>" class="btn btn-primary">
+                            <i class="bi bi-x-circle-fill"></i>
+                        </a>
                     </div>
                 </div>
             <?php } ?>
