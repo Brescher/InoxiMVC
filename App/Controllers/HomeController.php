@@ -35,6 +35,11 @@ class HomeController extends AControllerRedirect
     {
         return $this->html();
     }
+
+    public function update()
+    {
+        return $this->html();
+    }
     
     public function upload(){
         if (isset($_FILES['file'])) {
@@ -63,5 +68,37 @@ class HomeController extends AControllerRedirect
             $entry->delete();
         }
         $this->redirect('home');
+    }
+
+    public function updateEntry()
+    {
+        if (isset($_FILES['file'])) {
+            if ($_FILES["file"]["error"] == UPLOAD_ERR_OK) {
+                $name = date('Y-m-d-H-i-s_') . $_FILES['file']['name'];
+                move_uploaded_file($_FILES['file']['tmp_name'], Configuration::UPLOAD_DIR . "$name");
+                $id = $_GET['entryid'];
+                $title = $_POST['title'];
+                $text = $_POST['text'];
+                $newEntry = new Entry();
+                $newEntry->setId($id);
+                $newEntry->setImage($name);
+                $newEntry->setTitle($title);
+                $newEntry->setText($text);
+                $newEntry->save();
+            }
+        } else {    //ak nie je aktualizovany obrazok, tak sa zoberie stary
+            $id = $_GET['entryid'];
+            $title = $_POST['title'];
+            $text = $_POST['text'];
+            $entry = Entry::getOne($id);
+            $name = $entry->getImage();
+            $newEntry = new Entry();
+            $newEntry->setId($id);
+            $newEntry->setTitle($title);
+            $newEntry->setText($text);
+            $newEntry->setImage($name);
+            $newEntry->save();
+        }
+        $this->redirect("home");
     }
 }
