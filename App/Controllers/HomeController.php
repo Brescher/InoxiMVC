@@ -79,25 +79,30 @@ class HomeController extends AControllerRedirect
                 $id = $_GET['entryid'];
                 $title = $_POST['title'];
                 $text = $_POST['text'];
+
+                $oldEntry = Entry::getOne($id);
+                $oldName = $oldEntry->getImage();
+                unlink(Configuration::UPLOAD_DIR . "$oldName");
+
                 $newEntry = new Entry();
                 $newEntry->setId($id);
-                $newEntry->setImage($name);
                 $newEntry->setTitle($title);
                 $newEntry->setText($text);
+                $newEntry->setImage($name);
+                $newEntry->save();
+            }else {   //ak nie je aktualizovany obrazok, tak sa zoberie stary
+                $id = $_GET['entryid'];
+                $title = $_POST['title'];
+                $text = $_POST['text'];
+                $entry = Entry::getOne($id);
+                $name = $entry->getImage();
+                $newEntry = new Entry();
+                $newEntry->setId($id);
+                $newEntry->setTitle($title);
+                $newEntry->setText($text);
+                $newEntry->setImage($name);
                 $newEntry->save();
             }
-        } else {    //ak nie je aktualizovany obrazok, tak sa zoberie stary
-            $id = $_GET['entryid'];
-            $title = $_POST['title'];
-            $text = $_POST['text'];
-            $entry = Entry::getOne($id);
-            $name = $entry->getImage();
-            $newEntry = new Entry();
-            $newEntry->setId($id);
-            $newEntry->setTitle($title);
-            $newEntry->setText($text);
-            $newEntry->setImage($name);
-            $newEntry->save();
         }
         $this->redirect("home");
     }
