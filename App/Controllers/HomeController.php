@@ -107,15 +107,4 @@ class HomeController extends AControllerRedirect
         }
         $this->redirect("home");
     }
-
-    public function checkImgExt($name)
-    {
-        $allowed = array('jpeg', 'png', 'jpg');
-        $ext = pathinfo($name, PATHINFO_EXTENSION);
-        if (!in_array($ext, $allowed)) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
 }
