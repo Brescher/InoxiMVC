@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="d-flex justify-content-start flex-wrap">
-            <?php foreach ($data['entrys'] as $entry) { ?>
+            <?php foreach (array_reverse($data['entrys'])  as $entry) { ?>
                 <div class="card" style="width: 18rem; margin: 5px">
                     <img src="<?= \App\Config\Configuration::LOAD_DIR . $entry->getImage() ?>" class="card-img-top" alt="...">
                     <div class="card-body">

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end sticky-top">
     <div class="container">
         <a class="navbar-brand" href="#">InoxiPonia </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
