@@ -18,5 +18,4 @@ abstract class AControllerRedirect extends \App\Core\AControllerBase
         }
         header($location);
     }
-
 }

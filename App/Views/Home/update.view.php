@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <form method="post" enctype="multipart/form-data" action="?c=home&a=updateEntry&entryid=<?php echo $entryID = $_GET['entryid'] ?>" onsubmit=" return validate(this)">
+        <form method="post" enctype="multipart/form-data" action="?c=home&a=updateEntry&entryid=<?php echo $entryID = $_GET['entryid']; ?>" onsubmit=" return validate(this)">
             <div>
                 <?php
                 $entryID = $_GET['entryid'];
