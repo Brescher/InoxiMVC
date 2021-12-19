@@ -32,32 +32,34 @@ class LoginController extends AControllerRedirect
             $passwordRepeat = $_POST["passwordrepeat"];
 
             if($this->emptyInputSignup($email, $username, $password, $passwordRepeat) !== false){
-                $this->redirect("login", "error", "emptyinput");
+                $this->redirect("login", "register", "error");
                 exit();
             }
             if($this->invalidEmail($email) !== false){
-                $this->redirect("login", "error", "invalidEmail");
+                $this->redirect("login", "register");
                 exit();
             }
             if($this->invalidUsername($username) !== false){
-                $this->redirect("login", "error", "invalidUsername");
+                $this->redirect("login", "register");
                 exit();
             }
             if($this->passwordMatch($password, $passwordRepeat) !== false){
-                $this->redirect("login", "error", "passworddontmatch");
+                $this->redirect("login", "register");
                 exit();
             }
             if($this->usernameEmailExists($username, $email) !== false){
-                $this->redirect("login", "error", "usernameExists");
+                $this->redirect("login", "register");
                 exit();
             }
+
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             $newUser = new User();
             $newUser->setEmail($email);
             $newUser->setUsername($username);
-            $newUser->setPassword($password);
+            $newUser->setPassword($hashedPassword);
             $newUser->save();
-            $this->redirect("home", "index");
+            $this->redirect("login", "login");
         } else {
             $this->redirect("login", "register");
             exit();
@@ -65,7 +67,51 @@ class LoginController extends AControllerRedirect
     }
 
     public function loginUser(){
+        if(isset($_POST["login"])){
+            $username = $_POST["username"];
+            $password = $_POST["password"];
 
+            if($this->emptyInputLogin($username, $password) !== false){
+                $this->redirect("login", "login", "error");
+                exit();
+            }
+
+            $allUsers = User::getAll();
+
+            foreach ($allUsers as $user){
+                if(($user->getUsername() === $username) || ($user->getEmail() === $username)){
+                    $pwdHashed = $user->getPassword();
+                    $checkPwd = password_verify($password, $pwdHashed);
+                    if ($checkPwd === false) {
+                        $this->redirect("login", "login", "error");
+                        exit();
+                    } else if ($checkPwd === true) {
+                        session_start();
+                        $_SESSION["userid"] = $user->getUserId();
+                        $_SESSION["username"] = $user->getUsername();
+                        $this->redirect("home", "index");
+                        exit();
+                    }
+                } else {
+                    $result = true;
+                }
+            }
+            if($result !== false) {
+                $this->redirect("login", "login", "error");
+                exit();
+            }
+        } else {
+            $this->redirect("login", "login");
+            exit();
+        }
+    }
+
+    public function logout()
+    {
+        session_start();
+        session_unset();
+        session_destroy();
+        $this->redirect("home", "index");
     }
 
     public function emptyInputSignup($email, $username, $password, $passwordRepeat)
@@ -90,7 +136,7 @@ class LoginController extends AControllerRedirect
 
     public function invalidUsername($username)
     {
-        if(!preg_match(("/^[a-zA-Z0-9]*$/"), $username)){
+        if(!preg_match("/^[a-zA-Z0-9]*$/", $username)){
             $result = true;
         } else {
             $result = false;
@@ -108,18 +154,28 @@ class LoginController extends AControllerRedirect
         return $result;
     }
 
-
     public function usernameEmailExists($username, $email)
     {
         $result = false;
         $allUsers = User::getAll();
-        foreach ($allUsers['users'] as $user){
+
+        foreach ($allUsers as $user){
             if(($user->getUsername() === $username) || ($user->getEmail() === $email)){
                 $result = true;
                 break;
             } else {
                 $result = false;
             }
+        }
+        return $result;
+    }
+
+    public function emptyInputLogin($username, $password)
+    {
+        if(empty($username) || empty($password)){
+            $result = true;
+        } else {
+            $result = false;
         }
         return $result;
     }

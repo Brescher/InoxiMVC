@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -29,12 +33,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="?c=home&a=entry">Pridanie fotky</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="?c=login&a=register">Registrácia</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="?c=login&a=login">Prihlásenie</a>
-                </li>
+
+                <?php
+                    if(isset($_SESSION["userid"])){
+                        echo "<li class='nav-item'>";
+                        echo "    <a class='nav-link' href='?c=login&a=register'>Profil</a>";
+                        echo "</li>";
+                        echo "<li class='nav-item'>";
+                        echo "    <a class='nav-link' href='?c=login&a=logout'>Odhlásenie</a>";
+                        echo "</li>";
+                    } else {
+                        echo "<li class='nav-item'>";
+                        echo "    <a class='nav-link' href='?c=login&a=register'>Registrácia</a>";
+                        echo "</li>";
+                        echo "<li class='nav-item'>";
+                        echo "    <a class='nav-link' href='?c=login&a=login'>Prihlásenie</a>";
+                        echo "</li>";
+                    }
+                ?>
             </ul>
         </div>
     </div>
