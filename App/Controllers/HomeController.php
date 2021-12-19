@@ -73,7 +73,7 @@ class HomeController extends AControllerRedirect
     public function updateEntry()
     {
         if (isset($_FILES['file'])) {
-            $id = $_GET['entryid'];
+            $id = $this->request()->getValue('entryid');
             $title = $_POST['title'];
             $text = $_POST['text'];
             $newEntry = new Entry();

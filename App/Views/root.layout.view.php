@@ -29,6 +29,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="?c=home&a=entry">Pridanie fotky</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?c=login&a=register">Registrácia</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?c=login&a=login">Prihlásenie</a>
+                </li>
             </ul>
         </div>
     </div>
