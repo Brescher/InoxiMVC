@@ -47,7 +47,7 @@ class LoginController extends AControllerRedirect
                 $this->redirect("login", "error", "passworddontmatch");
                 exit();
             }
-            if($this->usernameExists($username) !== false){
+            if($this->usernameEmailExists($username, $email) !== false){
                 $this->redirect("login", "error", "usernameExists");
                 exit();
             }
@@ -68,24 +68,59 @@ class LoginController extends AControllerRedirect
 
     }
 
-    public function emptyInputSignup()
+    public function emptyInputSignup($email, $username, $password, $passwordRepeat)
     {
-        return false;
+        if(empty($email) || empty($username) || empty($password) || empty($passwordRepeat)){
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
     }
-    public function invalidEmail()
+
+    public function invalidEmail($email)
     {
-        return false;
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
     }
-    public function invalidUsername()
+
+    public function invalidUsername($username)
     {
-        return false;
+        if(!preg_match(("/^[a-zA-Z0-9]*$/"), $username)){
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
     }
-    public function passwordMatch()
+
+    public function passwordMatch($password, $passwordRepeat)
     {
-        return false;
+        if($password !== $passwordRepeat){
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
     }
-    public function usernameExists()
+
+
+    public function usernameEmailExists($username, $email)
     {
-        return false;
+        $result = false;
+        $allUsers = User::getAll();
+        foreach ($allUsers['users'] as $user){
+            if(($user->getUsername() === $username) || ($user->getEmail() === $email)){
+                $result = true;
+                break;
+            } else {
+                $result = false;
+            }
+        }
+        return $result;
     }
 }
