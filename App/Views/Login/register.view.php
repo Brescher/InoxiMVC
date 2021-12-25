@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <form method="post" action="?c=login&a=registerUser" onsubmit=" return validate(this)">
+        <form method="post" action="?c=login&a=registerUser"">
             <div>
                 <input type="text" name="email" id="email" placeholder="Email..." ><br>
                 <input type="text" name="username" id="username" placeholder="Používateľské meno..." required><br>

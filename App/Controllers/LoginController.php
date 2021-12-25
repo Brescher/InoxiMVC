@@ -31,8 +31,10 @@ class LoginController extends AControllerRedirect
             $password = $_POST["password"];
             $passwordRepeat = $_POST["passwordrepeat"];
 
+
             if($this->emptyInputSignup($email, $username, $password, $passwordRepeat) !== false){
-                $this->redirect("login", "register", "error");
+                $error = "Prazdne pole.";
+                $this->redirect("login", "register", $error);
                 exit();
             }
             if($this->invalidEmail($email) !== false){

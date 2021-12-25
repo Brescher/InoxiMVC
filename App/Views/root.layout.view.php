@@ -35,6 +35,7 @@
                 </li>
 
                 <?php
+
                     if(isset($_SESSION["userid"])){
                         echo "<li class='nav-item'>";
                         echo "    <a class='nav-link' href='?c=login&a=register'>Profil</a>";
