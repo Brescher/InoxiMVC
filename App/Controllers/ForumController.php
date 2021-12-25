@@ -12,6 +12,6 @@ class ForumController extends AControllerRedirect
      */
     public function index()
     {
-        return $this->html();
+        $this->redirect("home");
     }
 }

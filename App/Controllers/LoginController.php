@@ -11,9 +11,9 @@ class LoginController extends AControllerRedirect
 
     public function index()
     {
-        return $this->html();
+        $this->redirect("home");
     }
-
+    //$error
     public function register()
     {
         return $this->html();
@@ -34,23 +34,32 @@ class LoginController extends AControllerRedirect
 
             if($this->emptyInputSignup($email, $username, $password, $passwordRepeat) !== false){
                 $error = "Prazdne pole.";
-                $this->redirect("login", "register", $error);
+                $this->redirect("login", "register", [$error]);
                 exit();
             }
             if($this->invalidEmail($email) !== false){
-                $this->redirect("login", "register");
+                $error = "Treba zadať email.";
+                $this->redirect("login", "register", [$error]);
                 exit();
             }
             if($this->invalidUsername($username) !== false){
-                $this->redirect("login", "register");
+                $error = "Zlé poúživateľské meno, dovolené znaky sú A-Z, a-z, 0-9.";
+                $this->redirect("login", "register", [$error]);
                 exit();
             }
             if($this->passwordMatch($password, $passwordRepeat) !== false){
-                $this->redirect("login", "register");
+                $error = "Heslá sa nezhodujú";
+                $this->redirect("login", "register", [$error]);
                 exit();
             }
-            if($this->usernameEmailExists($username, $email) !== false){
-                $this->redirect("login", "register");
+            if($this->usernameExists($username) !== false){
+                $error = "Dané poúživateľské meno už existuje.";
+                $this->redirect("login", "register", [$error]);
+                exit();
+            }
+            if($this->emailExists($email) !== false){
+                $error = "Daný email už existuje.";
+                $this->redirect("login", "register", [$error]);
                 exit();
             }
 
@@ -156,13 +165,29 @@ class LoginController extends AControllerRedirect
         return $result;
     }
 
-    public function usernameEmailExists($username, $email)
+    public function usernamelExists($username)
     {
         $result = false;
         $allUsers = User::getAll();
 
         foreach ($allUsers as $user){
-            if(($user->getUsername() === $username) || ($user->getEmail() === $email)){
+            if(($user->getUsername() === $username)){
+                $result = true;
+                break;
+            } else {
+                $result = false;
+            }
+        }
+        return $result;
+    }
+
+    public function emailExists($email)
+    {
+        $result = false;
+        $allUsers = User::getAll();
+
+        foreach ($allUsers as $user){
+            if(($user->getEmail() === $email)){
                 $result = true;
                 break;
             } else {

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <form method="post" action="?c=login&a=registerUser"">
+        <form method="post" action="?c=login&a=registerUser">
             <div>
                 <input type="text" name="email" id="email" placeholder="Email..." ><br>
                 <input type="text" name="username" id="username" placeholder="Používateľské meno..." required><br>
@@ -11,6 +11,6 @@
                 </div>
             </div>
         </form>
-        <p id="error_para" ></p>
+        <p id="error_para" ><?php echo ($_GET["0"])?></p>
     </div>
 </div>
