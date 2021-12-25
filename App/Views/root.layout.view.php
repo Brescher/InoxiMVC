@@ -45,7 +45,7 @@
                         echo "</li>";
                     } else {
                         echo "<li class='nav-item'>";
-                        echo "    <a class='nav-link' href='?c=login&a=register&error=ok'>Registrácia</a>";
+                        echo "    <a class='nav-link' href='?c=login&a=register&0='>Registrácia</a>";
                         echo "</li>";
                         echo "<li class='nav-item'>";
                         echo "    <a class='nav-link' href='?c=login&a=login'>Prihlásenie</a>";
