@@ -38,7 +38,7 @@
 
                     if(isset($_SESSION["userid"])){
                         echo "<li class='nav-item'>";
-                        echo "    <a class='nav-link' href='?c=login&a=register'>Profil</a>";
+                        echo "    <a class='nav-link' href='?c=forum&a=profile'>";echo $_SESSION['username']; echo "</a>";
                         echo "</li>";
                         echo "<li class='nav-item'>";
                         echo "    <a class='nav-link' href='?c=login&a=logout'>Odhlásenie</a>";
@@ -48,7 +48,7 @@
                         echo "    <a class='nav-link' href='?c=login&a=register&0='>Registrácia</a>";
                         echo "</li>";
                         echo "<li class='nav-item'>";
-                        echo "    <a class='nav-link' href='?c=login&a=login'>Prihlásenie</a>";
+                        echo "    <a class='nav-link' href='?c=login&a=login&0='>Prihlásenie</a>";
                         echo "</li>";
                     }
                 ?>

@@ -30,25 +30,21 @@ class LoginController extends AControllerRedirect
             $username = $_POST["username"];
             $password = $_POST["password"];
             $passwordRepeat = $_POST["passwordrepeat"];
+            $error = "";
 
 
             if($this->emptyInputSignup($email, $username, $password, $passwordRepeat) !== false){
-                $error = "Prazdne pole.";
+                $error = "Musíte vyplniť všetky polia.";
                 $this->redirect("login", "register", [$error]);
                 exit();
             }
             if($this->invalidEmail($email) !== false){
-                $error = "Treba zadať email.";
+                $error = "Neplatná emailová adresa.";
                 $this->redirect("login", "register", [$error]);
                 exit();
             }
             if($this->invalidUsername($username) !== false){
-                $error = "Zlé poúživateľské meno, dovolené znaky sú A-Z, a-z, 0-9.";
-                $this->redirect("login", "register", [$error]);
-                exit();
-            }
-            if($this->passwordMatch($password, $passwordRepeat) !== false){
-                $error = "Heslá sa nezhodujú";
+                $error = "Zlé poúživateľské meno, dovolené znaky sú: A-Z, a-z, 0-9.";
                 $this->redirect("login", "register", [$error]);
                 exit();
             }
@@ -62,6 +58,26 @@ class LoginController extends AControllerRedirect
                 $this->redirect("login", "register", [$error]);
                 exit();
             }
+            if($this->checkNameLength($username) !== false){
+                $error = "Používateľské meno musí byť dlhšie ako 5 znakov a kratšie ako 13 znakov.";
+                $this->redirect("login", "register", [$error]);
+                exit();
+            }
+            if($this->checkPasswdLength($password) !== false){
+                $error = "Heslo musí byť dlhšie ako 8 znakov.";
+                $this->redirect("login", "register", [$error]);
+                exit();
+            }
+            if($this->checkPasswdStrength($password) !== false){
+                $error = "Heslo musí obsahovať aspoň jedno veľké písmeno, jedno malé písmeno a jednu číslicu.";
+                $this->redirect("login", "register", [$error]);
+                exit();
+            }
+            if($this->passwordMatch($password, $passwordRepeat) !== false){
+                $error = "Heslá sa nezhodujú";
+                $this->redirect("login", "register", [$error]);
+                exit();
+            }
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -70,9 +86,10 @@ class LoginController extends AControllerRedirect
             $newUser->setUsername($username);
             $newUser->setPassword($hashedPassword);
             $newUser->save();
-            $this->redirect("login", "login");
+            $this->redirect("login", "login", [$error]);
         } else {
-            $this->redirect("login", "register");
+            $error = "Prosím, registrujte sa normálnym spôsobom.";
+            $this->redirect("login", "register", [$error]);
             exit();
         }
     }
@@ -95,7 +112,8 @@ class LoginController extends AControllerRedirect
                     $pwdHashed = $user->getPassword();
                     $checkPwd = password_verify($password, $pwdHashed);
                     if ($checkPwd === false) {
-                        $this->redirect("login", "login", "error");
+                        $error = "Zlé heslo.";
+                        $this->redirect("login", "login", [$error]);
                         exit();
                     } else if ($checkPwd === true) {
                         session_start();
@@ -109,11 +127,13 @@ class LoginController extends AControllerRedirect
                 }
             }
             if($result !== false) {
-                $this->redirect("login", "login", "error");
+                $error = "Daný užívateľ neexistuje.";
+                $this->redirect("login", "login", [$error]);
                 exit();
             }
         } else {
-            $this->redirect("login", "login");
+            $error = "Prosím, prihláste sa normálnym spôsobom.";
+            $this->redirect("login", "login", [$error]);
             exit();
         }
     }
@@ -125,6 +145,9 @@ class LoginController extends AControllerRedirect
         session_destroy();
         $this->redirect("home", "index");
     }
+
+
+    //validacia reg a log
 
     public function emptyInputSignup($email, $username, $password, $passwordRepeat)
     {
@@ -166,13 +189,13 @@ class LoginController extends AControllerRedirect
         return $result;
     }
 
-    public function usernamelExists($username)
+    public function usernameExists($username)
     {
         $result = false;
         $allUsers = User::getAll();
 
         foreach ($allUsers as $user){
-            if(($user->getUsername() === $username)){
+            if(strtolower($user->getUsername()) === strtolower($username)){
                 $result = true;
                 break;
             } else {
@@ -201,6 +224,44 @@ class LoginController extends AControllerRedirect
     public function emptyInputLogin($username, $password)
     {
         if(empty($username) || empty($password)){
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    public function checkNameLength($username)
+    {
+        $length = strlen(utf8_decode($username));
+
+        if($length < 5 ||$length > 13){
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    public function checkPasswdLength($pwd)
+    {
+        $length = strlen(utf8_decode($pwd));
+
+        if($length < 8){
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    public function checkPasswdStrength($pwd)
+    {
+        if ( !preg_match("#[0-9]+#", $pwd) ) {
+            $result = true;
+        } else if ( !preg_match("#[a-z]+#", $pwd) ) {
+            $result = true;
+        } else if ( !preg_match("#[A-Z]+#", $pwd) ) {
             $result = true;
         } else {
             $result = false;

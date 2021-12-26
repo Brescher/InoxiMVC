@@ -9,6 +9,6 @@
                 </div>
             </div>
         </form>
-        <p id="error_para" ></p>
+        <p id="error_para" ><?php echo ($_GET["0"])?></p>
     </div>
 </div>

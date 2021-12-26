@@ -14,4 +14,14 @@ class ForumController extends AControllerRedirect
     {
         $this->redirect("home");
     }
+
+    public function forum()
+    {
+        return $this->html();
+    }
+
+    public function profile()
+    {
+        return $this->html();
+    }
 }
