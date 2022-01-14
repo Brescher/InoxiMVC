@@ -1,1 +1,2 @@
-<?php /** @var Array $data */ ?>
+<?php
+
