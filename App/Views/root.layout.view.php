@@ -39,6 +39,9 @@ session_start();
                     if(isset($_SESSION["userid"])){
                         $username = $_SESSION["username"];
                         echo "<li class='nav-item'>";
+                        echo "    <a class='nav-link' href='?c=forum&a=forum'>Fórum</a>";
+                        echo "</li>";
+                        echo "<li class='nav-item'>";
                         echo "    <a class='nav-link' href='?c=forum&a=profile&username=$username'>";echo $_SESSION["username"]; echo "</a>";
                         echo "</li>";
                         echo "<li class='nav-item'>";
