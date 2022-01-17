@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <div class="row">
     <div class="col">
         <form method="post" enctype="multipart/form-data" action="?c=forum&a=upload" onsubmit=" return validate(this)">

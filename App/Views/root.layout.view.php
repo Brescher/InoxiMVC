@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 ?>
 
 <!DOCTYPE html>
@@ -33,26 +33,26 @@ session_start();
                 <li class="nav-item">
                     <a class="nav-link" href="?c=home&a=entry">Pridanie fotky</a>
                 </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='?c=forum&a=forum'>Fórum</a>
+                </li>
 
                 <?php
 
                     if(isset($_SESSION["userid"])){
                         $username = $_SESSION["username"];
                         echo "<li class='nav-item'>";
-                        echo "    <a class='nav-link' href='?c=forum&a=forum'>Fórum</a>";
-                        echo "</li>";
-                        echo "<li class='nav-item'>";
-                        echo "    <a class='nav-link' href='?c=forum&a=profile&username=$username'>";echo $_SESSION["username"]; echo "</a>";
+                        echo "    <a class='nav-link' href='?c=forum&a=profile&username=$username'>";echo $username; echo "</a>";
                         echo "</li>";
                         echo "<li class='nav-item'>";
                         echo "    <a class='nav-link' href='?c=login&a=logout'>Odhlásenie</a>";
                         echo "</li>";
                     } else {
                         echo "<li class='nav-item'>";
-                        echo "    <a class='nav-link' href='?c=login&a=register&0='>Registrácia</a>";
+                        echo "    <a class='nav-link' href='?c=login&a=login&0='>Prihlásenie</a>";
                         echo "</li>";
                         echo "<li class='nav-item'>";
-                        echo "    <a class='nav-link' href='?c=login&a=login&0='>Prihlásenie</a>";
+                        echo "    <a class='nav-link' href='?c=login&a=register&0='>Registrácia</a>";
                         echo "</li>";
                     }
                 ?>
