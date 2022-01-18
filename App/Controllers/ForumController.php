@@ -35,7 +35,17 @@ class ForumController extends AControllerRedirect
 
     public function updatepost()
     {
-        return $this->html();
+        $postId = $this->request()->getValue('postid');
+        if($postId > 0) {
+            session_start();
+            $post = Upost::getOne($postId);
+            $username = $post->getUsername();
+            if(strcmp($_SESSION['username'], $username) === 0 ){
+                return $this->html();
+            } else {
+                $this->redirect('forum', 'forum');
+            }
+        }
     }
 
     public function upload(){
@@ -60,10 +70,14 @@ class ForumController extends AControllerRedirect
     {
         $postId = $this->request()->getValue('postid');
         if($postId > 0) {
+            session_start();
             $post = Upost::getOne($postId);
-            $name = $post->getImage();
-            unlink(Configuration::UPLOAD_DIR . "$name");
-            $post->delete();
+            $username = $post->getUsername();
+            if(strcmp($_SESSION['username'], $username) === 0 ){
+                $name = $post->getImage();
+                unlink(Configuration::UPLOAD_DIR . "$name");
+                $post->delete();
+            }
         }
         $this->redirect('forum', 'forum');
     }
@@ -71,10 +85,12 @@ class ForumController extends AControllerRedirect
     public function update()
     {
         if (isset($_FILES['file'])) {
+            session_start();
             $id = $this->request()->getValue('postid');
             $text = $_POST['text'];
             $newPost = new Upost();
             $newPost->setId($id);
+            $newPost->setUsername($_SESSION['username']);
             $newPost->setText($text);
             if ($_FILES["file"]["error"] == UPLOAD_ERR_OK) {
                 $name = date('Y-m-d-H-i-s_') . $_FILES['file']['name'];

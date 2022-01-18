@@ -1,3 +1,7 @@
+<?php
+session_set_cookie_params(0);
+session_start();
+?>
 <div class="row">
     <div class="col">
         <form method="post" enctype="multipart/form-data" action="?c=home&a=upload" onsubmit=" return validate(this)">
