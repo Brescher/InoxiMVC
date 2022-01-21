@@ -35,12 +35,27 @@ session_start();
                     <div class="card-body">
                         <h5 class="card-title"><?= $post->getUsername() ?></h5>
                         <p class="card-text"><?= $post->getText() ?></p>
-                        <a href="?c=forum&a=updatePost&postid=<?= $post->getId() ?>" class="btn btn-primary">
+                        <?php
+                            if(isset($_SESSION['username'])) {
+                                $name = $_SESSION['username'];
+                                $postName = $post->getUsername();
+                                if (!strcmp($name, $postName)) {
+                                    $postid = $post->getId();
+                                    echo "<a href='?c=forum&a=updatePost&postid=$postid' class='btn btn-primary forum'>";
+                                    echo "    <i class='bi bi-arrow-up-square-fill'></i>";
+                                    echo "</a>";
+                                    echo "<a href='?c=forum&a=deletePost&postid=$postid' class='btn btn-primary forum'>";
+                                    echo "    <i class='bi bi-x-circle-fill'></i>";
+                                    echo "</a>";
+                                }
+                            }
+                        ?>
+                        <!--<a href="?c=forum&a=updatePost&postid=" class="btn btn-primary">
                             <i class="bi bi-arrow-up-square-fill"></i>
                         </a>
-                        <a href="?c=forum&a=deletePost&postid=<?= $post->getId() ?>" class="btn btn-primary">
+                        <a href="?c=forum&a=deletePost&postid=" class="btn btn-primary">
                             <i class="bi bi-x-circle-fill"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             <?php } ?>

@@ -67,3 +67,7 @@ h3, h2{
     background-image: url('../public/files/pozadie-navbar.png');
     margin-bottom: 25px;
 }
+
+.forum {
+    margin: 2px;
+}
