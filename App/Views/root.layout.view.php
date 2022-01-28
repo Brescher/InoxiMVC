@@ -35,7 +35,7 @@
                     <a class="nav-link" href="?c=home&a=entry">Pridanie fotky</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' href='?c=forum&a=forum'>Fórum</a>
+                    <a class='nav-link' id="forumAjax" href='?c=forum&a=forum'>Fórum</a>
                 </li>
 
                 <?php
@@ -43,7 +43,7 @@
                     if(isset($_SESSION["userid"])){
                         $username = $_SESSION["username"];
                         echo "<li class='nav-item'>";
-                        echo "    <a class='nav-link' href='?c=forum&a=profile&username=$username'>";echo $username; echo "</a>";
+                        echo "    <a class='nav-link' id='profileAjax' href='?c=forum&a=profile&username=$username'>";echo $username; echo "</a>";
                         echo "</li>";
                         echo "<li class='nav-item'>";
                         echo "    <a class='nav-link' href='?c=login&a=logout'>Odhlásenie</a>";

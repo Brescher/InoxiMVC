@@ -50,12 +50,6 @@ session_start();
                                 }
                             }
                         ?>
-                        <!--<a href="?c=forum&a=updatePost&postid=" class="btn btn-primary">
-                            <i class="bi bi-arrow-up-square-fill"></i>
-                        </a>
-                        <a href="?c=forum&a=deletePost&postid=" class="btn btn-primary">
-                            <i class="bi bi-x-circle-fill"></i>
-                        </a> -->
                     </div>
                 </div>
             <?php } ?>

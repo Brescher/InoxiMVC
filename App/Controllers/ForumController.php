@@ -30,7 +30,21 @@ class ForumController extends AControllerRedirect
 
     public function profile()
     {
-        return $this->html();
+        $username = $_GET["username"];
+        $clause = "username = ?";
+        $posts = Upost::getAll($clause, [$username]);
+        return $this->html(
+            [
+                'posts' => $posts
+            ]
+        );
+    }
+
+    public function getUserPost($username)
+    {
+        $clause = "username";
+        $posts = Upost::getAll($clause, [$username]);
+
     }
 
     public function updatepost()
