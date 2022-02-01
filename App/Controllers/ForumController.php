@@ -19,32 +19,42 @@ class ForumController extends AControllerRedirect
 
     public function forum()
     {
-        $posts = Upost::getAll();
+       /*$posts = Upost::getAll();
 
         return $this->html(
             [
                 'posts' => $posts
             ]
-        );
+        );*/
+        return $this->html();
     }
 
     public function profile()
     {
-        $username = $_GET["username"];
+        /*$username = $_GET["username"];
         $clause = "username = ?";
         $posts = Upost::getAll($clause, [$username]);
+        //return $this->json($posts);
         return $this->html(
             [
                 'posts' => $posts
             ]
-        );
+        );*/
+        return $this->html();
     }
 
-    public function getUserPost($username)
+    public function getUserPost()
     {
-        $clause = "username";
+        $clause = "username = ?";
+        $username = $_GET["username"];
         $posts = Upost::getAll($clause, [$username]);
+        return $this->json($posts);
+    }
 
+    public function getAllPosts()
+    {
+        $posts = Upost::getAll();
+        return $this->json($posts);
     }
 
     public function updatepost()
@@ -75,7 +85,12 @@ class ForumController extends AControllerRedirect
                 $newUpost->setImage($name);
                 $newUpost->setText($text);
                 $newUpost->save();
-                $this->redirect('forum', 'forum');
+                $action = $_GET["a"];
+                if(strcmp($action, "forum")){
+                    $this->redirect('forum', 'forum');
+                } else {
+                    $this->redirect('forum', 'profile');
+                }
             }
         }
     }

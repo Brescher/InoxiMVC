@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="InoxiMVC/public/css.css">
     <script src="InoxiMVC/public/validation.js""></script>
+    <script src="InoxiMVC/public/profile.js""></script>
 </head>
 <body>
 
