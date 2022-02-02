@@ -30,7 +30,7 @@ session_start();
     <div class="row">
         <div class="col">
             <div>
-                <button id="btn-odoslat-f">Odoslat</button>
+                <button id="btn-load-forum">Load</button>
             </div>
         </div>
     </div>

@@ -31,7 +31,7 @@ class ForumController extends AControllerRedirect
 
     public function profile()
     {
-        /*$username = $_GET["username"];
+        $username = $_GET["username"];
         $clause = "username = ?";
         $posts = Upost::getAll($clause, [$username]);
         //return $this->json($posts);
@@ -39,8 +39,7 @@ class ForumController extends AControllerRedirect
             [
                 'posts' => $posts
             ]
-        );*/
-        return $this->html();
+        );
     }
 
     public function getUserPost()
@@ -109,6 +108,7 @@ class ForumController extends AControllerRedirect
             }
         }
         $this->redirect('forum', 'forum');
+
     }
 
     public function update()

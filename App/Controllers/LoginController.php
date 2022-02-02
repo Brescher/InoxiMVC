@@ -119,6 +119,7 @@ class LoginController extends AControllerRedirect
                         session_start();
                         $_SESSION["userid"] = $user->getUserId();
                         $_SESSION["username"] = $user->getUsername();
+                        echo '<script> sessionStorage.setItem("username", "' . $_SESSION['username'] . '");</script>';
                         $this->redirect("home", "index");
                         exit();
                     }
