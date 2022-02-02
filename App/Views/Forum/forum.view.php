@@ -8,10 +8,8 @@ session_start();
             <div class="col">
                 <form method="post" enctype="multipart/form-data" action="?c=forum&a=upload" onsubmit=" return validate(this)">
                     <div>
-                        <label for="text">Text:</label>
-                        <textarea name="text" id="text" required></textarea>
+                        <textarea name="text" id="text" class="textfield" required></textarea>
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Obrázok</label>
                             <input name="file" class="form-control" id="formFile" type="file" required>
                         </div>
                         <div class="mb-3">

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="InoxiMVC/public/css.css">
     <script src="InoxiMVC/public/validation.js""></script>
     <script src="InoxiMVC/public/profile.js""></script>
+
 </head>
 <body>
 
@@ -31,9 +32,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="?c=home&a=contact">Kontakt</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="?c=home&a=entry">Pridanie fotky</a>
                 </li>
                 <li class='nav-item'>
                     <a class='nav-link' id="forumAjax" href='?c=forum&a=forum'>Fórum</a>
