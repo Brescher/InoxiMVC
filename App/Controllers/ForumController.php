@@ -134,6 +134,6 @@ class ForumController extends AControllerRedirect
                 $newPost->save();
             }
         }
-        $this->redirect('forum', 'forum');
+        $this->redirect('forum', 'profile', [$_SESSION['username']]);
     }
 }

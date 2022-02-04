@@ -35,7 +35,19 @@
                     <a class="nav-link" href="?c=home&a=contact">Kontakt</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' id="forumAjax" href='?c=forum&a=forum'>Fórum</a>
+                    <?php
+                        if(isset($_GET['a'])) {
+                            $current = $_GET['a'];
+                            $wanted = "forum";
+                            if (strcmp($current, $wanted) === 0) {
+                                echo "<button id='btn-load-forum'>Load</button>";
+                            } else {
+                                echo "<a class='nav-link' id='forumAjax' href='?c=forum&a=forum'>Fórum</a>";
+                            }
+                        }else {
+                            echo "<a class='nav-link' id='forumAjax' href='?c=forum&a=forum'>Fórum</a>";
+                        }
+                    ?>
                 </li>
 
                 <?php

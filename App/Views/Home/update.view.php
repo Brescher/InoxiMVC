@@ -1,3 +1,7 @@
+<?php
+session_set_cookie_params(0);
+session_start();
+?>
 <div class="row">
     <div class="col">
         <form method="post" enctype="multipart/form-data" action="?c=home&a=updateEntry&entryid=<?php echo $entryID = $_GET['entryid']; ?>" onsubmit=" return validate(this)">
@@ -7,7 +11,7 @@
                 $entry = \App\Models\Entry::getOne($entryID);
                 ?>
                 <input type="text" name="title" id="title" class="textfield" value="<?php  echo $entry->getTitle()?>" required><br>
-                <textarea name="text" id="text" required><?php  echo $entry->getText()?></textarea>
+                <textarea name="text" id="text" class="textfield" required><?php  echo $entry->getText()?></textarea>
                 <div class="mb-3">
                     <input name="file" class="form-control" id="formFile" type="file">
                 </div>

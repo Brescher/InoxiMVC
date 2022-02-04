@@ -16,43 +16,8 @@ h3, h2{
     text-align: center;
 }
 
-.entry{
-    margin-bottom: 50px;
-}
-
-.header .col-md-1, .col-md-8{
-    text-transform: uppercase;
-    line-height: 22px;
-    margin: 0px;
-}
-
-.header p{
-    margin-bottom: 0px;
-}
-
-.header img {
-    max-height: 22px;
-    max-width: 22px;
-}
-
 .text{
     border-left: 2px solid white;
-}
-
-.card {
-    display:inline-block;
-    background-color: #353535;
-    color: lightgray;
-}
-
-.card .card-body h1{
-    max-width: 20%;
-    font-size: 100%;
-}
-
-.card-img-top{
-    width:100%;
-    height:auto;
 }
 
 .navbar-nav .nav-item .nav-link{
@@ -81,6 +46,16 @@ h3, h2{
     resize: vertical;
 }
 
+.form-entry{
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    margin: 0 auto 50px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
 .login-page {
     width: 360px;
     padding: 8% 0 0;
@@ -89,13 +64,13 @@ h3, h2{
 .form {
     position: relative;
     z-index: 1;
-
     max-width: 360px;
     margin: 0 auto 100px;
     padding: 45px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
 .form input {
     font-family: sans-serif;
     outline: 0;
@@ -107,7 +82,7 @@ h3, h2{
     box-sizing: border-box;
     font-size: 14px;
 }
-.form button {
+.btn-form{
     font-family: sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -119,9 +94,15 @@ h3, h2{
     font-size: 14px;
     cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
+
+.no-reg{
+    width: 30%;
+}
+
+.btn-form:hover, .btn-form:active, .btn-form:focus{
     background: #43A047;
 }
+
 .form .message {
     margin: 15px 0 0;
     color: #b3b3b3;

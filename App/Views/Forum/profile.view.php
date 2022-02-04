@@ -9,14 +9,14 @@ if(isset($_SESSION['userid'])){
     if(strcmp($user,$profile) === 0){?>
     <div class="row">
         <div class="col">
-            <form method="post" enctype="multipart/form-data" action="?c=forum&a=upload" onsubmit=" return validate(this)">
+            <form method="post" enctype="multipart/form-data" action="?c=forum&a=upload" class="form-entry" onsubmit=" return validate(this)">
                 <div>
-                    <textarea name="text" id="text" class="textfield" required></textarea>
+                    <textarea name="text" id="text" class="textfield" placeholder="Text..." required></textarea>
                     <div class="mb-3">
                         <input name="file" class="form-control" id="formFile" type="file" required>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Odoslať</button>
+                        <button type="submit" class="btn-form no-reg">Odoslať</button>
                     </div>
                 </div>
                 <p class="error_para" ></p>
@@ -27,34 +27,34 @@ if(isset($_SESSION['userid'])){
 }
 ?>
 
+
+
 <?php /** @var Array $data */ ?>
-<div class="container">
-    <div class="row">
-        <div class="d-flex justify-content-start flex-wrap">
-            <?php foreach (array_reverse($data['posts'])  as $post) { ?>
-                <div class="card" style="width: 18rem; margin: 5px">
-                    <img src="<?= \App\Config\Configuration::LOAD_DIR . $post->getImage() ?>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $post->getUsername() ?></h5>
-                        <p class="card-text"><?= $post->getText() ?></p>
-                        <?php
-                        if(isset($_SESSION['username'])) {
-                            $name = $_SESSION['username'];
-                            $postName = $post->getUsername();
-                            if (!strcmp($name, $postName)) {
-                                $postid = $post->getId();
-                                echo "<a href='?c=forum&a=updatePost&postid=$postid' class='btn btn-primary forum'>";
-                                echo "    <i class='bi bi-arrow-up-square-fill'></i>";
-                                echo "</a>";
-                                echo "<a href='?c=forum&a=deletePost&postid=$postid' class='btn btn-primary forum'>";
-                                echo "    <i class='bi bi-x-circle-fill'></i>";
-                                echo "</a>";
-                            }
-                        }
-                        ?>
-                    </div>
-                </div>
-            <?php } ?>
+<div class="container-fluid" id="uPostsAll">
+    <?php foreach (array_reverse($data['posts'])  as $post) { ?>
+    <div class='main-container'>
+        <div class='left-container'>
+            <img src="<?= \App\Config\Configuration::LOAD_DIR . $post->getImage() ?>"  class='img-thumbnail img-fluid rounded imgForum'  alt='...' >
+        </div>
+        <div class='right-container'>
+            <h5><a href='?c=forum&a=profile&0='><?= $post->getUsername() ?></a></h5>
+            <p><?= $post->getText() ?></p>
+            <?php
+            if(isset($_SESSION['username'])) {
+                $name = $_SESSION['username'];
+                $postName = $post->getUsername();
+                if (!strcmp($name, $postName)) {
+                    $postid = $post->getId();
+                    echo "<a href='?c=forum&a=updatePost&postid=$postid' class='btn btn-primary forum'>";
+                    echo "    <i class='bi bi-arrow-up-square-fill'></i>";
+                    echo "</a>";
+                    echo "<a href='?c=forum&a=deletePost&postid=$postid' class='btn btn-primary forum'>";
+                    echo "    <i class='bi bi-x-circle-fill'></i>";
+                    echo "</a>";
+                }
+            }
+            ?>
         </div>
     </div>
+    <?php } ?>
 </div>
