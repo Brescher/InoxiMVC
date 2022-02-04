@@ -6,10 +6,8 @@
                 $postID = $_GET['postid'];
                 $post = \App\Models\Upost::getOne($postID);
                 ?>
-                <label for="text">Text:</label>
-                <textarea name="text" id="text" required><?php  echo $post->getText()?></textarea>
+                <textarea name="text" id="text" class="textfield" required><?php  echo $post->getText()?></textarea>
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">Obrázok</label>
                     <input name="file" class="form-control" id="formFile" type="file">
                 </div>
                 <div class="mb-3">

@@ -3,7 +3,10 @@ session_set_cookie_params(0);
 session_start();
 ?>
 <?php
-if(isset($_SESSION['userid'])){ ?>
+if(isset($_SESSION['userid'])){
+    $user = $_SESSION['username'];
+    $profile = $_GET['0'];
+    if(strcmp($user,$profile) === 0){?>
     <div class="row">
         <div class="col">
             <form method="post" enctype="multipart/form-data" action="?c=forum&a=upload" onsubmit=" return validate(this)">
@@ -16,11 +19,12 @@ if(isset($_SESSION['userid'])){ ?>
                         <button type="submit" class="btn btn-primary">Odoslať</button>
                     </div>
                 </div>
+                <p class="error_para" ></p>
             </form>
-            <p id="error_para" ></p>
         </div>
     </div>
 <?php    }
+}
 ?>
 
 <?php /** @var Array $data */ ?>

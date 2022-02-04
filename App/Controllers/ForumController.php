@@ -31,7 +31,7 @@ class ForumController extends AControllerRedirect
 
     public function profile()
     {
-        $username = $_GET["username"];
+        $username = $_GET["0"];
         $clause = "username = ?";
         $posts = Upost::getAll($clause, [$username]);
         //return $this->json($posts);
@@ -84,12 +84,7 @@ class ForumController extends AControllerRedirect
                 $newUpost->setImage($name);
                 $newUpost->setText($text);
                 $newUpost->save();
-                $action = $_GET["a"];
-                if(strcmp($action, "forum")){
-                    $this->redirect('forum', 'forum');
-                } else {
-                    $this->redirect('forum', 'profile');
-                }
+                $this->redirect('forum', 'profile', [$_SESSION['username']]);
             }
         }
     }
@@ -106,8 +101,9 @@ class ForumController extends AControllerRedirect
                 unlink(Configuration::UPLOAD_DIR . "$name");
                 $post->delete();
             }
+            $this->redirect('forum', 'profile', [$_SESSION['username']]);
         }
-        $this->redirect('forum', 'forum');
+
 
     }
 

@@ -31,13 +31,25 @@ class Posts {
             .then(data => {
                 let html = "";
                 for(let message of data.reverse()){
-                    html += "<div className='card' style='width: 18rem; margin: 5px'>"
-                            + "<img src='InoxiMVC/public/files/" + message.image + "' className='card-img-top' alt='...' width='100%'>"
-                                + "<div className='card-body'>"
-                                    + "<h5 className='card-title'>" + message.username + "</h5>"
-                                    + "<p className='card-text'>" + message.text +"</p>"
-                                + "</div>"
-                            + "</div>";
+                    html +=
+                        "<div class='main-container'>"
+                            +"<div class='left-container'>"
+                                + "<img src='InoxiMVC/public/files/" + message.image + "'  class='img-thumbnail img-fluid rounded imgForum'  alt='...' >"
+                            +"</div>"
+                            +"<div class='right-container'>"
+                                + "<h5>" + "<a href='?c=forum&a=profile&0=" + message.username + "'>" + message.username + "</a>" + "</h5>"
+                                + "<p>" + message.text +"</p>"
+                            +"</div>"
+                        +"</div>"
+                        /*"<div class='row justify-content-start grid-container' '>"
+                            + "<div class='grid-item grid-item-left'>"
+                                + "<img src='InoxiMVC/public/files/" + message.image + "'  class='img-thumbnail img-fluid rounded imgForum'  alt='...' >"
+                            + "</div>"
+                            + "<div class='grid-item'>"
+                                + "<h5>" + "<a href='?c=forum&a=profile&0=" + message.username + "'>" + message.username + "</a>" + "</h5>"
+                                + "<p>" + message.text +"</p>"
+                            + "</div>"
+                        + "</div>";*/
                 }
                 document.getElementById("uPostsAll").innerHTML = html;
             });
@@ -46,12 +58,12 @@ class Posts {
 
 
 window.onload = function () {
-    var chat = new Posts();
+    var posts = new Posts();
 
-    chat.getAllPosts();
+    posts.getAllPosts();
 
     document.getElementById("btn-load-forum").onclick = () => {
-        chat.getAllPosts();
+        posts.getAllPosts();
     }
 
 }

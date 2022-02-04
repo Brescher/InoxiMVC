@@ -24,6 +24,71 @@ class LoginController extends AControllerRedirect
         return $this->html();
     }
 
+    public function regUser()
+    {
+        $email = $this->request()->getValue("email");
+        $username = $this->request()->getValue("username");
+        $password = $this->request()->getValue("password");
+        $passwordRepeat = $this->request()->getValue("passwordrepeat");
+        $error="";
+
+        if($this->emptyInputSignup($email, $username, $password, $passwordRepeat) !== false){
+            $error = "Musíte vyplniť všetky polia.";
+            $this->redirect("login", "register", [$error]);
+            exit();
+        }
+        if($this->invalidEmail($email) !== false){
+            $error = "Neplatná emailová adresa.";
+            $this->redirect("login", "register", [$error]);
+            exit();
+        }
+        if($this->invalidUsername($username) !== false){
+            $error = "Zlé poúživateľské meno, dovolené znaky sú: A-Z, a-z, 0-9.";
+            $this->redirect("login", "register", [$error]);
+            exit();
+        }
+        if($this->usernameExists($username) !== false){
+            $error = "Dané poúživateľské meno už existuje.";
+            $this->redirect("login", "register", [$error]);
+            exit();
+        }
+        if($this->emailExists($email) !== false){
+            $error = "Daný email už existuje.";
+            $this->redirect("login", "register", [$error]);
+            exit();
+        }
+        if($this->checkNameLength($username) !== false){
+            $error = "Používateľské meno musí byť dlhšie ako 5 znakov a kratšie ako 13 znakov.";
+            $this->redirect("login", "register", [$error]);
+            exit();
+        }
+        if($this->checkPasswdLength($password) !== false){
+            $error = "Heslo musí byť dlhšie ako 8 znakov.";
+            $this->redirect("login", "register", [$error]);
+            exit();
+        }
+        if($this->checkPasswdStrength($password) !== false){
+            $error = "Heslo musí obsahovať aspoň jedno veľké písmeno, jedno malé písmeno a jednu číslicu.";
+            $this->redirect("login", "register", [$error]);
+            exit();
+        }
+        if($this->passwordMatch($password, $passwordRepeat) !== false){
+            $error = "Heslá sa nezhodujú";
+            $this->redirect("login", "register", [$error]);
+            exit();
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $newUser = new User();
+        $newUser->setEmail($email);
+        $newUser->setUsername($username);
+        $newUser->setPassword($hashedPassword);
+        $newUser->save();
+        $this->redirect("login", "login", [$error]);
+
+    }
+
     public function registerUser(){
         if(isset($_POST["register"])){
             $email = $_POST["email"];
@@ -100,7 +165,7 @@ class LoginController extends AControllerRedirect
             $password = $_POST["password"];
 
             if($this->emptyInputLogin($username, $password) !== false){
-                $error = "Prazdne pole.";
+                $error = "Vyplnte všetky polia.";
                 $this->redirect("login", "login", [$error]);
                 exit();
             }
@@ -119,7 +184,7 @@ class LoginController extends AControllerRedirect
                         session_start();
                         $_SESSION["userid"] = $user->getUserId();
                         $_SESSION["username"] = $user->getUsername();
-                        echo '<script> sessionStorage.setItem("username", "' . $_SESSION['username'] . '");</script>';
+
                         $this->redirect("home", "index");
                         exit();
                     }

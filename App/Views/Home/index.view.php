@@ -21,8 +21,8 @@ if(isset($_SESSION['username'])) {
                             <button type="submit" class="btn btn-primary">Odoslať</button>
                         </div>
                     </div>
+                    <p id="error_para" ></p>
                 </form>
-                <p id="error_para" ></p>
             </div>
         </div>
     <?php }
