@@ -32,7 +32,10 @@
                     <a class="nav-link" href="?c=home">Domov</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?c=home&a=contact">Kontakt</a>
+                    <a class="nav-link" href="?c=product&a=product">Produkty</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?c=home&a=contact">Info</a>
                 </li>
                 <li class='nav-item'>
                     <?php
@@ -40,7 +43,7 @@
                             $current = $_GET['a'];
                             $wanted = "forum";
                             if (strcmp($current, $wanted) === 0) {
-                                echo "<button id='btn-load-forum'>Load</button>";
+                                echo "<button id='btn-load-forum' class='btn-load-forum'>Fórum</button>";
                             } else {
                                 echo "<a class='nav-link' id='forumAjax' href='?c=forum&a=forum'>Fórum</a>";
                             }

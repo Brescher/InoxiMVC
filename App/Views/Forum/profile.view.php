@@ -37,23 +37,26 @@ if(isset($_SESSION['userid'])){
             <img src="<?= \App\Config\Configuration::LOAD_DIR . $post->getImage() ?>"  class='img-thumbnail img-fluid rounded imgForum'  alt='...' >
         </div>
         <div class='right-container'>
-            <h5><a href='?c=forum&a=profile&0='><?= $post->getUsername() ?></a></h5>
-            <p><?= $post->getText() ?></p>
-            <?php
-            if(isset($_SESSION['username'])) {
-                $name = $_SESSION['username'];
-                $postName = $post->getUsername();
-                if (!strcmp($name, $postName)) {
-                    $postid = $post->getId();
-                    echo "<a href='?c=forum&a=updatePost&postid=$postid' class='btn btn-primary forum'>";
-                    echo "    <i class='bi bi-arrow-up-square-fill'></i>";
-                    echo "</a>";
-                    echo "<a href='?c=forum&a=deletePost&postid=$postid' class='btn btn-primary forum'>";
-                    echo "    <i class='bi bi-x-circle-fill'></i>";
-                    echo "</a>";
+            <h5><a href='?c=forum&a=profile&0='><?= $post->getUsername() ?></a>
+                <div class="button-container">
+                <?php
+                if(isset($_SESSION['username'])) {
+                    $name = $_SESSION['username'];
+                    $postName = $post->getUsername();
+                    if (!strcmp($name, $postName)) {
+                        $postid = $post->getId();
+                        echo "<a href='?c=forum&a=updatePost&postid=$postid' class='btn btn-primary forum'>";
+                        echo "    <i class='bi bi-arrow-up-square-fill'></i>";
+                        echo "</a>";
+                        echo "<a href='?c=forum&a=deletePost&postid=$postid' class='btn btn-primary forum'>";
+                        echo "    <i class='bi bi-x-circle-fill'></i>";
+                        echo "</a>";
+                    }
                 }
-            }
-            ?>
+                ?>
+                </div>
+            </h5>
+            <p><?= $post->getText() ?></p>
         </div>
     </div>
     <?php } ?>

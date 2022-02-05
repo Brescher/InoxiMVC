@@ -1,6 +1,6 @@
 body {
     background-image: url('../public/files/background.png');
-    background-size: cover;
+
     background-repeat: repeat;
     color: lightgray;
 }
@@ -10,10 +10,11 @@ p{
     color: lightgray;
 }
 
-h3, h2{
+h3, h2, h5{
     font-family: Arial, Verdana, sans-serif;
     color: lightgray;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .text{
@@ -143,12 +144,37 @@ h3, h2{
     margin: 5px;
     padding-left: 10px;
     border-left: 2px solid white;
+    position: relative;
 }
 
-@media (max-width: 800px) {
+.button-container{
+    float:right;
+}
+
+@media (max-width: 1000px) {
     .main-container {
         flex-direction: column;
     }
+}
+
+.btn-load-forum {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    padding: .5rem 1rem;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    color: lightgray;
+}
+
+.btn-load-forum:hover{
+    display: block;
+    color: black;
+}
+
+.btn-primary{
+    margin-right: 5px;
 }
 
 

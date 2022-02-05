@@ -62,10 +62,14 @@ class HomeController extends AControllerRedirect
     {
         $entryId = $this->request()->getValue('entryid');
         if($entryId > 0) {
-            $entry = Entry::getOne($entryId);
-            $name = $entry->getImage();
-            unlink(Configuration::UPLOAD_DIR . "$name");
-            $entry->delete();
+            session_start();
+            $username = "becho";
+            if(strcmp($_SESSION['username'], $username) === 0 ) {
+                $entry = Entry::getOne($entryId);
+                $name = $entry->getImage();
+                unlink(Configuration::UPLOAD_DIR . "$name");
+                $entry->delete();
+            }
         }
         $this->redirect('home');
     }

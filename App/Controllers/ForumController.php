@@ -103,8 +103,6 @@ class ForumController extends AControllerRedirect
             }
             $this->redirect('forum', 'profile', [$_SESSION['username']]);
         }
-
-
     }
 
     public function update()
