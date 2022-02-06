@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Config\Configuration;
 use App\Core\Responses\Response;
+use App\Models\Upost;
 use App\Models\User;
 
 class LoginController extends AControllerRedirect
@@ -22,6 +23,17 @@ class LoginController extends AControllerRedirect
     public function login()
     {
         return $this->html();
+    }
+
+    public function users()
+    {
+        $users = User::getAll();
+
+        return $this->html(
+            [
+                'users' => $users
+            ]
+        );
     }
 
     public function registerUser(){
@@ -64,7 +76,7 @@ class LoginController extends AControllerRedirect
                 exit();
             }
             if($this->checkPasswdLength($password) !== false){
-                $error = "Heslo musí byť dlhšie ako 8 znakov.";
+                $error = "Heslo musí byť dlhšie ako 8 znakov a kratšie ako 20 znakov.";
                 $this->redirect("login", "register", [$error]);
                 exit();
             }
@@ -85,6 +97,7 @@ class LoginController extends AControllerRedirect
             $newUser->setEmail($email);
             $newUser->setUsername($username);
             $newUser->setPassword($hashedPassword);
+            $newUser->setUserType("user");
             $newUser->save();
             $this->redirect("login", "login", [$error]);
         } else {
@@ -117,9 +130,9 @@ class LoginController extends AControllerRedirect
                         exit();
                     } else if ($checkPwd === true) {
                         session_start();
-                        $_SESSION["userid"] = $user->getUserId();
+                        $_SESSION["userid"] = $user->getId();
                         $_SESSION["username"] = $user->getUsername();
-
+                        $_SESSION["usertype"] = $user->getUserType();
                         $this->redirect("home", "index");
                         exit();
                     }
@@ -147,6 +160,86 @@ class LoginController extends AControllerRedirect
         $this->redirect("home", "index");
     }
 
+    public function addAdmin()
+    {
+        $userid = $this->request()->getValue('userid');
+        if($userid > 0){
+            $oldUser = User::getOne($userid);
+            $username = $oldUser->getUsername();
+            $email = $oldUser->getEmail();
+            $password = $oldUser->getPassword();
+
+            $user = new User();
+            $user->setId($userid);
+            $user->setEmail($email);
+            $user->setUsername($username);
+            $user->setPassword($password);
+            $user->setUserType("admin");
+            $user->save();
+            $this->redirect("login", "users");
+        }
+    }
+
+    public function removeAdmin()
+    {
+        $userid = $this->request()->getValue('userid');
+        if($userid > 0){
+            $oldUser = User::getOne($userid);
+            $username = $oldUser->getUsername();
+            $email = $oldUser->getEmail();
+            $password = $oldUser->getPassword();
+
+            $user = new User();
+            $user->setId($userid);
+            $user->setEmail($email);
+            $user->setUsername($username);
+            $user->setPassword($password);
+            $user->setUserType("user");
+            $user->save();
+            $this->redirect("login", "users");
+        }
+    }
+
+    public function deleteUser()
+    {
+        $userId = $this->request()->getValue('userid');
+        if($userId > 0) {
+            session_start();
+            $usertype = "admin";
+            if(strcmp($_SESSION['usertype'], $usertype) === 0 || $_SESSION['userid'] == $userId) {
+                $user = User::getOne($userId);
+                if($userId == $_SESSION['userid']){
+                    $clause = "username = ?";
+                    $username = $user->getUsername();
+                    $posts = Upost::getAll($clause, [$username]);
+                    foreach($posts as $post){
+                        $name = $post->getImage();
+                        unlink(Configuration::UPLOAD_DIR . "$name");
+                        $post->delete();
+                    }
+                    $user->delete();
+                    session_start();
+                    session_unset();
+                    session_destroy();
+                    $this->redirect("home", "index");
+                } else {
+                    $clause = "username = ?";
+                    $username = $user->getUsername();
+                    $posts = Upost::getAll($clause, [$username]);
+                    foreach($posts as $post){
+                        $name = $post->getImage();
+                        unlink(Configuration::UPLOAD_DIR . "$name");
+                        $post->delete();
+                    }
+                    $user->delete();
+                    $this->redirect('login', "users");
+                }
+            }
+        } else {
+            $this->redirect('login', "users");
+        }
+
+    }
 
     //validacia reg a log
 
@@ -248,7 +341,7 @@ class LoginController extends AControllerRedirect
     {
         $length = strlen(utf8_decode($pwd));
 
-        if($length < 8){
+        if($length < 8 || $length > 20){
             $result = true;
         } else {
             $result = false;

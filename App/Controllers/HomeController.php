@@ -50,7 +50,7 @@ class HomeController extends AControllerRedirect
                 $text = $_POST['text'];
                 $textlen = strlen($text);
                 $titlelen = strlen($title);
-                if($titlelen > 100 || $titlelen < 10 || $textlen > 800 || $textlen < 100){
+                if($titlelen > 100 || $titlelen < 10 || $textlen > 800 || $textlen < 50){
                     $this->redirect("home", "index");
                     exit();
                 }
@@ -69,8 +69,8 @@ class HomeController extends AControllerRedirect
         $entryId = $this->request()->getValue('entryid');
         if($entryId > 0) {
             session_start();
-            $username = "becho";
-            if(strcmp($_SESSION['username'], $username) === 0 ) {
+            $usertype = "admin";
+            if(strcmp($_SESSION['usertype'], $usertype) === 0 ) {
                 $entry = Entry::getOne($entryId);
                 $name = $entry->getImage();
                 unlink(Configuration::UPLOAD_DIR . "$name");
@@ -88,7 +88,7 @@ class HomeController extends AControllerRedirect
             $text = $_POST['text'];
             $textlen = strlen($text);
             $titlelen = strlen($title);
-            if($titlelen > 100 || $titlelen < 10 || $textlen > 800 || $textlen < 100){
+            if($titlelen > 100 || $titlelen < 10 || $textlen > 800 || $textlen < 50){
                 $this->redirect("home", "index");
                 exit();
             }

@@ -80,7 +80,7 @@ class ForumController extends AControllerRedirect
                 $username = $_SESSION["username"];
                 $text = $_POST['text'];
                 $textlen = strlen($text);
-                if($textlen > 800 || $textlen < 100){
+                if($textlen > 800 || $textlen < 50){
                     $this->redirect("forum", "profile", [$_SESSION['username']]);
                     exit();
                 }
@@ -117,7 +117,7 @@ class ForumController extends AControllerRedirect
             $id = $this->request()->getValue('postid');
             $text = $_POST['text'];
             $textlen = strlen($text);
-            if($textlen > 800 || $textlen < 100){
+            if($textlen > 800 || $textlen < 50){
                 $this->redirect("forum", "profile", [$_SESSION['username']]);
                 exit();
             }

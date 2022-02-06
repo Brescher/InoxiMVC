@@ -6,10 +6,11 @@ class User extends \App\Core\Model
 {
 
     public function __construct(
-        public int $userId = 0,
+        public int     $id = 0,
         public ?string $email = null,
         public ?string $username = null,
-        public ?string $password = null
+        public ?string $password = null,
+        public ?string $userType = null
     )
     {
 
@@ -17,7 +18,7 @@ class User extends \App\Core\Model
 
     static public function setDbColumns()
     {
-        return ['userId', 'email', 'username', 'password'];
+        return ['id', 'email', 'username', 'password', 'userType'];
     }
 
     static public function setTableName()
@@ -28,17 +29,17 @@ class User extends \App\Core\Model
     /**
      * @return int
      */
-    public function getUserId(): int
+    public function getId(): int
     {
-        return $this->userId;
+        return $this->id;
     }
 
     /**
-     * @param int $userId
+     * @param int $id
      */
-    public function setUserId(int $userId): void
+    public function setId(int $id): void
     {
-        $this->userId = $userId;
+        $this->id = $id;
     }
 
     /**
@@ -87,6 +88,22 @@ class User extends \App\Core\Model
     public function setPassword(?string $password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUserType(): ?string
+    {
+        return $this->userType;
+    }
+
+    /**
+     * @param string|null $userType
+     */
+    public function setUserType(?string $userType): void
+    {
+        $this->userType = $userType;
     }
 
 

@@ -45,8 +45,8 @@ function validate(form)
         if(text.length > 800){
             alert("Pardon, maximálna dĺžka textu je 800 znakov.");
             return false;
-        } else if (text.length < 100){
-            alert("Pardon, minimálna dĺžka textu je 100 znakov.");
+        } else if (text.length < 50){
+            alert("Pardon, minimálna dĺžka textu je 50 znakov.");
             return false;
         }
     }

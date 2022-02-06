@@ -60,6 +60,13 @@
                         echo "<li class='nav-item'>";
                         echo "    <a class='nav-link' id='profileAjax' href='?c=forum&a=profile&0=$username'>";echo $username; echo "</a>";
                         echo "</li>";
+                        $userType = "admin";
+                        $currentUser = $_SESSION["usertype"];
+                        if(strcmp($currentUser, $userType) === 0){
+                            echo "<li class='nav-item'>";
+                            echo "    <a class='nav-link' href='?c=login&a=users'>Používatelia</a>";
+                            echo "</li>";
+                        }
                         echo "<li class='nav-item'>";
                         echo "    <a class='nav-link' href='?c=login&a=logout'>Odhlásenie</a>";
                         echo "</li>";

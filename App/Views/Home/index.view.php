@@ -5,9 +5,9 @@ session_start();
 
 <?php
 if(isset($_SESSION['username'])) {
-    $name = $_SESSION['username'];
-    $adminName = "becho";
-    if (!strcmp($name, $adminName)) { ?>
+    $type = $_SESSION["usertype"];
+    $adminName = "admin";
+    if (!strcmp($type, $adminName)) { ?>
         <div class="row">
             <div class="col">
                 <form method="post" enctype="multipart/form-data" action="?c=home&a=upload" class="form-entry" onsubmit=" return validate(this)">
@@ -43,9 +43,9 @@ if(isset($_SESSION['username'])) {
                     <div class="button-container">
                         <?php
                         if(isset($_SESSION['username'])) {
-                            $name = $_SESSION['username'];
-                            $adminName = "becho";
-                            if (!strcmp($name, $adminName)) {
+                            $type = $_SESSION["usertype"];
+                            $adminName = "admin";
+                            if (!strcmp($type, $adminName)) {
                                 $postid = $entry->getId();
                                 echo "<a href='?c=home&a=update&entryid=$postid' class='btn btn-primary'>";
                                 echo "    <i class='bi bi-arrow-up-square-fill update-button'></i>";

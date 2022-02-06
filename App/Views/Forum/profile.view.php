@@ -7,22 +7,25 @@ if(isset($_SESSION['userid'])){
     $user = $_SESSION['username'];
     $profile = $_GET['0'];
     if(strcmp($user,$profile) === 0){?>
-    <div class="row">
-        <div class="col">
-            <form method="post" enctype="multipart/form-data" action="?c=forum&a=upload" class="form-entry" onsubmit=" return validate(this)">
-                <div>
-                    <textarea name="text" id="text" class="textfield" placeholder="Text..." required></textarea>
-                    <div class="mb-3">
-                        <input name="file" class="form-control" id="formFile" type="file" required>
+        <a href='?c=login&a=deleteUser&userid=<?= $_SESSION['userid']?>' >
+            <button type='button'>Vymazať používateľa</button>
+        </a>
+        <div class="row">
+            <div class="col">
+                <form method="post" enctype="multipart/form-data" action="?c=forum&a=upload" class="form-entry" onsubmit=" return validate(this)">
+                    <div>
+                        <textarea name="text" id="text" class="textfield" placeholder="Text..." required></textarea>
+                        <div class="mb-3">
+                            <input name="file" class="form-control" id="formFile" type="file" required>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn-form no-reg">Odoslať</button>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <button type="submit" class="btn-form no-reg">Odoslať</button>
-                    </div>
-                </div>
-                <p class="error_para" ></p>
-            </form>
+                    <p class="error_para" ></p>
+                </form>
+            </div>
         </div>
-    </div>
 <?php    }
 }
 ?>
