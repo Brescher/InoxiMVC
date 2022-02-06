@@ -38,7 +38,11 @@ class ProductController extends AControllerRedirect
                 $name = $_POST["name"];
                 $material = $_POST["material"];
                 $desc = $_POST["description"];
-                if(strlen($name > 150) || strlen($name < 50) ||strlen($material > 200) || strlen($material < 10) || strlen($desc > 300) || strlen($desc < 50)){
+
+                $namelen = strlen($name);
+                $materiallen = strlen($material);
+                $desclen = strlen($desc);
+                if($namelen  > 150 || $namelen < 10 || $materiallen > 200 || $materiallen < 10 || $desclen > 500 || $desclen < 50){
                     $this->redirect("product", "product");
                     exit();
                 }
@@ -76,6 +80,14 @@ class ProductController extends AControllerRedirect
             $name = $_POST['name'];
             $material = $_POST['material'];
             $desc = $_POST['description'];
+
+            $namelen = strlen($name);
+            $materiallen = strlen($material);
+            $desclen = strlen($desc);
+            if($namelen  > 150 || $namelen < 10 || $materiallen > 200 || $materiallen < 10 || $desclen > 500 || $desclen < 50){
+                $this->redirect("product", "product");
+                exit();
+            }
 
             $newproduct = new Product();
             $newproduct->setId($id);

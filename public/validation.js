@@ -42,8 +42,8 @@ function validate(form)
     if(document.getElementById("text") != null){
         let text = document.getElementById("text").value;
 
-        if(text.length > 600){
-            alert("Pardon, maximálna dĺžka textu je 600 znakov.");
+        if(text.length > 800){
+            alert("Pardon, maximálna dĺžka textu je 800 znakov.");
             return false;
         } else if (text.length < 100){
             alert("Pardon, minimálna dĺžka textu je 100 znakov.");
@@ -57,8 +57,8 @@ function validate(form)
         if(text.length > 150){
             alert("Pardon, maximálna dĺžka názvu je 150 znakov.");
             return false;
-        } else if (text.length < 50){
-            alert("Pardon, minimálna dĺžka názvu je 50 znakov.");
+        } else if (text.length < 10){
+            alert("Pardon, minimálna dĺžka názvu je 10 znakov.");
             return false;
         }
     }
@@ -78,8 +78,8 @@ function validate(form)
     if(document.getElementById("description") != null){
         let text = document.getElementById("description").value;
 
-        if(text.length > 300){
-            alert("Pardon, maximálna dĺžka popisu produktu je 300 znakov.");
+        if(text.length > 500){
+            alert("Pardon, maximálna dĺžka popisu produktu je 500 znakov.");
             return false;
         } else if (text.length < 50){
             alert("Pardon, minimálna dĺžka popisu produktu je 50 znakov.");

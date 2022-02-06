@@ -79,7 +79,8 @@ class ForumController extends AControllerRedirect
                 move_uploaded_file($_FILES['file']['tmp_name'], Configuration::UPLOAD_DIR . "$name");
                 $username = $_SESSION["username"];
                 $text = $_POST['text'];
-                if(strlen($text > 600) || strlen($text < 100)){
+                $textlen = strlen($text);
+                if($textlen > 800 || $textlen < 100){
                     $this->redirect("forum", "profile", [$_SESSION['username']]);
                     exit();
                 }
@@ -115,7 +116,8 @@ class ForumController extends AControllerRedirect
             session_start();
             $id = $this->request()->getValue('postid');
             $text = $_POST['text'];
-            if(strlen($text > 600) || strlen($text < 100)){
+            $textlen = strlen($text);
+            if($textlen > 800 || $textlen < 100){
                 $this->redirect("forum", "profile", [$_SESSION['username']]);
                 exit();
             }
