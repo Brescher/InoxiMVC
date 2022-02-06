@@ -48,6 +48,10 @@ class HomeController extends AControllerRedirect
                 move_uploaded_file($_FILES['file']['tmp_name'], Configuration::UPLOAD_DIR . "$name");
                 $title = $_POST['title'];
                 $text = $_POST['text'];
+                if(strlen($title > 100) || strlen($title < 10) || strlen($text > 600) || strlen($text < 100)){
+                    $this->redirect("home", "index");
+                    exit();
+                }
                 $newEntry = new Entry();
                 $newEntry->setImage($name);
                 $newEntry->setTitle($title);
@@ -80,6 +84,10 @@ class HomeController extends AControllerRedirect
             $id = $this->request()->getValue('entryid');
             $title = $_POST['title'];
             $text = $_POST['text'];
+            if(strlen($title > 100) || strlen($title < 10) || strlen($text > 600) || strlen($text < 100)){
+                $this->redirect("home", "index");
+                exit();
+            }
             $newEntry = new Entry();
             $newEntry->setId($id);
             $newEntry->setTitle($title);

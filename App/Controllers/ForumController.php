@@ -79,6 +79,10 @@ class ForumController extends AControllerRedirect
                 move_uploaded_file($_FILES['file']['tmp_name'], Configuration::UPLOAD_DIR . "$name");
                 $username = $_SESSION["username"];
                 $text = $_POST['text'];
+                if(strlen($text > 600) || strlen($text < 100)){
+                    $this->redirect("forum", "profile", [$_SESSION['username']]);
+                    exit();
+                }
                 $newUpost = new Upost();
                 $newUpost->setUsername($username);
                 $newUpost->setImage($name);
@@ -111,6 +115,10 @@ class ForumController extends AControllerRedirect
             session_start();
             $id = $this->request()->getValue('postid');
             $text = $_POST['text'];
+            if(strlen($text > 600) || strlen($text < 100)){
+                $this->redirect("forum", "profile", [$_SESSION['username']]);
+                exit();
+            }
             $newPost = new Upost();
             $newPost->setId($id);
             $newPost->setUsername($_SESSION['username']);

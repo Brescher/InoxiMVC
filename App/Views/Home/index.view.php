@@ -15,7 +15,7 @@ if(isset($_SESSION['username'])) {
                         <input type="text" name="title" id="title" class="textfield" placeholder="Titulok..." required><br>
                         <textarea name="text" id="text" class="textfield" placeholder="Text..." required></textarea>
                         <div class="mb-3">
-                            <input  name="file[]" class="form-control" id="formFile" type="file" placeholder="Obrázok..." required>
+                            <input  name="file" class="form-control" id="formFile" type="file" placeholder="Obrázok..." required>
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn-form no-reg">Odoslať</button>

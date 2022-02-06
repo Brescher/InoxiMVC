@@ -38,9 +38,9 @@ if(isset($_SESSION['username'])) {
                 <img src="<?= \App\Config\Configuration::LOAD_DIR . $product->getImage() ?>" class='img-thumbnail img-fluid rounded imgForum' alt='...' >
             </div>
             <div class='right-container'>
-                <p><?= $product->getName() ?></p>
-                <p><?= $product->getMaterial() ?></p>
-                <p><?= $product->getDescription() ?></p>
+                <p><?= $product->getName() ?></p><br>
+                <p>Materiál: <?= $product->getMaterial() ?></p><br>
+                <p><?= $product->getDescription() ?></p><br>
                 <div class="button-container">
                     <?php
                     if(isset($_SESSION['username'])) {

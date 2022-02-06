@@ -1,29 +1,5 @@
 class Posts {
 
-    sendMessage(){
-        let text = document.getElementById("text").value;
-
-        if(text.length < 3){
-            alert("Moc kratky text.");
-            return;
-        }
-
-        fetch("?a=addMessage", {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/x-www-form-urlencoded',
-            },
-            body: "text=" + text
-        })
-            .then(response =>response.json())
-            .then(response => {
-                if(response == "error"){
-                    alert("Moc kratky text. Server");
-                    return;
-                }
-            });
-    }
-
     getAllPosts(){
         let url = '?c=forum&a=getAllPosts';
         fetch('?c=forum&a=getAllPosts')
