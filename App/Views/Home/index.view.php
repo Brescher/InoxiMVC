@@ -39,7 +39,7 @@ if(isset($_SESSION['username'])) {
             </div>
             <div class='right-container'>
                 <h5>
-                    <?= $entry->getTitle() ?>
+
                     <div class="button-container">
                         <?php
                         if(isset($_SESSION['username'])) {
@@ -47,16 +47,17 @@ if(isset($_SESSION['username'])) {
                             $adminName = "admin";
                             if (!strcmp($type, $adminName)) {
                                 $postid = $entry->getId();
-                                echo "<a href='?c=home&a=update&entryid=$postid' class='btn btn-primary'>";
+                                echo "<a href='?c=home&a=update&entryid=$postid' class='btn btn-update' title='update'>";
                                 echo "    <i class='bi bi-arrow-up-square-fill update-button'></i>";
                                 echo "</a>";
-                                echo "<a href='?c=home&a=deleteEntry&entryid=$postid' class='btn btn-primary'>";
+                                echo "<a href='?c=home&a=deleteEntry&entryid=$postid' class='btn btn-delete' title='delete'>";
                                 echo "    <i class='bi bi-x-circle-fill delete-button'></i>";
                                 echo "</a>";
                             }
                         }
                         ?>
                     </div>
+                    <?= $entry->getTitle() ?>
                 </h5>
                 <p><?= $entry->getText() ?></p>
             </div>

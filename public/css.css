@@ -119,6 +119,7 @@ h3, h2, h5{
 
  .imgForum{
      max-width: 100%;
+     max-height: 500px;
      height: auto;
      border-right: 2px solid white;
  }
@@ -176,5 +177,22 @@ h3, h2, h5{
 .btn-primary{
     margin-right: 5px;
 }
+
+.btn-update {
+    color: #4CAF50;
+}
+
+.btn-update:hover{
+    color: darkgreen;
+}
+
+.btn-delete{
+    color: red;
+}
+
+.btn-delete:hover{
+    color: darkred;
+}
+
 
 

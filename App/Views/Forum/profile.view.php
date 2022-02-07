@@ -8,7 +8,7 @@ if(isset($_SESSION['userid'])){
     $profile = $_GET['0'];
     if(strcmp($user,$profile) === 0){?>
         <a href='?c=login&a=deleteUser&userid=<?= $_SESSION['userid']?>' >
-            <button type='button'>Vymazať používateľa</button>
+            <button type='button'>Vymazať účet.</button>
         </a>
         <div class="row">
             <div class="col">
@@ -48,10 +48,10 @@ if(isset($_SESSION['userid'])){
                     $postName = $post->getUsername();
                     if (!strcmp($name, $postName)) {
                         $postid = $post->getId();
-                        echo "<a href='?c=forum&a=updatePost&postid=$postid' class='btn btn-primary forum'>";
+                        echo "<a href='?c=forum&a=updatePost&postid=$postid' class='btn btn-update forum' title='update'>";
                         echo "    <i class='bi bi-arrow-up-square-fill'></i>";
                         echo "</a>";
-                        echo "<a href='?c=forum&a=deletePost&postid=$postid' class='btn btn-primary forum'>";
+                        echo "<a href='?c=forum&a=deletePost&postid=$postid' class='btn btn-delete forum' title='delete'>";
                         echo "    <i class='bi bi-x-circle-fill'></i>";
                         echo "</a>";
                     }

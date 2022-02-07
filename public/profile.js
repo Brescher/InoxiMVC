@@ -37,7 +37,7 @@ class Posts {
             passwordRepeat: pwdRepeat
         }
 
-        fetch("?a=regUser", {
+        fetch("?c=login&a=regUser", {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/x-www-form-urlencoded',

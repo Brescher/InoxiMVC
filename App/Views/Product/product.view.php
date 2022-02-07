@@ -48,10 +48,10 @@ if(isset($_SESSION['username'])) {
                         $adminName = "admin";
                         if (!strcmp($type, $adminName)) {
                             $productid = $product->getId();
-                            echo "<a href='?c=product&a=updateProduct&productid=$productid' class='btn btn-primary'>";
+                            echo "<a href='?c=product&a=updateProduct&productid=$productid' class='btn btn-update' title='update'>";
                             echo "    <i class='bi bi-arrow-up-square-fill update-button'></i>";
                             echo "</a>";
-                            echo "<a href='?c=product&a=deleteProduct&productid=$productid' class='btn btn-primary'>";
+                            echo "<a href='?c=product&a=deleteProduct&productid=$productid' class='btn btn-delete' title='delete'>";
                             echo "    <i class='bi bi-x-circle-fill delete-button'></i>";
                             echo "</a>";
                         }
