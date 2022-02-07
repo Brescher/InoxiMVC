@@ -36,7 +36,7 @@ function validate(form)
         if (size > 2) {
 
             alert('Obrázok môže mať max 2MB');
-
+            return false;
         }
     }
 
