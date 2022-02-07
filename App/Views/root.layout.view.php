@@ -1,7 +1,4 @@
-<?php
-//session_set_cookie_params(0);
-//session_start();
-?>
+
 
 <!DOCTYPE html>
 <html lang="sk">
@@ -14,8 +11,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="InoxiMVC/public/css.css">
-    <script src="InoxiMVC/public/validation.js""></script>
-    <script src="InoxiMVC/public/profile.js""></script>
+    <script src="InoxiMVC/public/validation.js"></script>
+    <script src="InoxiMVC/public/manageUsers.js"></script>
+    <script src="InoxiMVC/public/profile.js"></script>
 
 </head>
 <body>
@@ -32,10 +30,10 @@
                     <a class="nav-link" href="?c=home">Domov</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?c=product&a=product">Produkty</a>
+                    <a class="nav-link" href="?c=home&a=contact">Info</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?c=home&a=contact">Info</a>
+                    <a class="nav-link" href="?c=product&a=product">Produkty</a>
                 </li>
                 <li class='nav-item'>
                     <?php
@@ -47,7 +45,7 @@
                             } else {
                                 echo "<a class='nav-link' id='forumAjax' href='?c=forum&a=forum'>Fórum</a>";
                             }
-                        }else {
+                        } else {
                             echo "<a class='nav-link' id='forumAjax' href='?c=forum&a=forum'>Fórum</a>";
                         }
                     ?>
@@ -92,4 +90,3 @@
 </div>
 </body>
 </html>
-

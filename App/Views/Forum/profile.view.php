@@ -7,9 +7,6 @@ if(isset($_SESSION['userid'])){
     $user = $_SESSION['username'];
     $profile = $_GET['0'];
     if(strcmp($user,$profile) === 0){?>
-        <a href='?c=login&a=deleteUser&userid=<?= $_SESSION['userid']?>' >
-            <button type='button'>Vymazať účet.</button>
-        </a>
         <div class="row">
             <div class="col">
                 <form method="post" enctype="multipart/form-data" action="?c=forum&a=upload" class="form-entry" onsubmit=" return validate(this)">

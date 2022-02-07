@@ -1,19 +1,19 @@
 function validate(form)
 {
-    var validExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
+    let validExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 
-    var arrInputs = form.getElementsByTagName("input");
+    let arrInputs = form.getElementsByTagName("input");
 
 
-    for (var i = 0; i < arrInputs.length; i++) {
-        var input = arrInputs[i];
+    for (let i = 0; i < arrInputs.length; i++) {
+        let input = arrInputs[i];
         if (input.type == "file") {
-            var fileName = input.value;
+            let fileName = input.value;
             if (fileName.length > 0) {
-                var isValid = false;
-                for (var j = 0; j < validExtensions.length; j++) {
-                    var currentExtension = validExtensions[j];
-                    var fileExtension = fileName.substr(fileName.length - currentExtension.length, currentExtension.length).toLowerCase();
+                let isValid = false;
+                for (let j = 0; j < validExtensions.length; j++) {
+                    let currentExtension = validExtensions[j];
+                    let fileExtension = fileName.substr(fileName.length - currentExtension.length, currentExtension.length).toLowerCase();
                     if (fileExtension == currentExtension.toLowerCase()) {
                         isValid = true;
                         break;

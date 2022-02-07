@@ -28,12 +28,17 @@ class LoginController extends AControllerRedirect
     public function users()
     {
         $users = User::getAll();
-
         return $this->html(
             [
                 'users' => $users
             ]
         );
+    }
+
+    public function  getAllUsers()
+    {
+        $users = User::getAll();
+        return $this->json($users);
     }
 
     public function registerUser(){
@@ -162,7 +167,8 @@ class LoginController extends AControllerRedirect
 
     public function addAdmin()
     {
-        $userid = $this->request()->getValue('userid');
+        //$userid = $this->request()->getValue('userid');
+        $userid = $_GET['0'];
         if($userid > 0){
             $oldUser = User::getOne($userid);
             $username = $oldUser->getUsername();
@@ -176,13 +182,19 @@ class LoginController extends AControllerRedirect
             $user->setPassword($password);
             $user->setUserType("admin");
             $user->save();
-            $this->redirect("login", "users");
+            $err = "ok";
+            return $this->json($err);
+            //$this->redirect("login", "users");
+        } else {
+            $err = "error";
+            return $this->json($err);
         }
     }
 
     public function removeAdmin()
     {
-        $userid = $this->request()->getValue('userid');
+        //$userid = $this->request()->getValue('userid');
+        $userid = $_GET['0'];
         if($userid > 0){
             $oldUser = User::getOne($userid);
             $username = $oldUser->getUsername();
@@ -196,13 +208,19 @@ class LoginController extends AControllerRedirect
             $user->setPassword($password);
             $user->setUserType("user");
             $user->save();
-            $this->redirect("login", "users");
+            $err = "ok";
+            return $this->json($err);
+            //$this->redirect("login", "users");
+        } else {
+            $err = "error";
+            return $this->json($err);
         }
     }
 
     public function deleteUser()
     {
-        $userId = $this->request()->getValue('userid');
+        //$userId = $this->request()->getValue('userid');
+        $userId = $_GET['0'];
         if($userId > 0) {
             session_start();
             $usertype = "admin";
@@ -221,7 +239,9 @@ class LoginController extends AControllerRedirect
                     session_start();
                     session_unset();
                     session_destroy();
-                    $this->redirect("home", "index");
+                    $err = "ok";
+                    return $this->json($err);
+                    //$this->redirect("home", "index");
                 } else {
                     $clause = "username = ?";
                     $username = $user->getUsername();
@@ -232,13 +252,15 @@ class LoginController extends AControllerRedirect
                         $post->delete();
                     }
                     $user->delete();
-                    $this->redirect('login', "users");
+                    $err = "ok";
+                    return $this->json($err);
+                    //$this->redirect('login', "users");
                 }
             }
         } else {
-            $this->redirect('login', "users");
+            $err = "error";
+            return $this->json($err);
         }
-
     }
 
     //validacia reg a log
