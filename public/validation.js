@@ -27,6 +27,19 @@ function validate(form)
         }
     }
 
+    var image = document.getElementById("formFile");
+
+    if (typeof (image.files) != "undefined") {
+
+        var size = parseFloat(image.files[0].size / (1024 * 1024)).toFixed(2);
+
+        if (size > 2) {
+
+            alert('Obrázok môže mať max 2MB');
+
+        }
+    }
+
     if(document.getElementById("title") != null){
         let title = document.getElementById("title").value;
 
